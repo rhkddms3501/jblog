@@ -13,16 +13,12 @@ select * from category;
 select * from post;
 
 -- isUser (유저 존재 여부  검색)
-select ifnull(count(id), 0)
+select ifnull(count(*), 0)
 from user
 where id = 'hd';
 
-select ifnull(count(no), 0)
+select ifnull(count(*), 0)
 from category
-where id = 'hd' and no = '2';
-
-select ifnull(count(no), 0)
-from post
 where id = 'hd' and no = '2';
 
 select  ifnull(count(*), 0)
