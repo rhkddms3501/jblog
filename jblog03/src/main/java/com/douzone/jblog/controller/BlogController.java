@@ -42,7 +42,7 @@ public class BlogController {
 	@RequestMapping({
 		"",
 		"/{categoryno}",
-		"/{categoryno}/{postno}",})
+		"/{categoryno}/{postno}"})
 	public String blog(
 			@PathVariable("id") String id,
 			@PathVariable("categoryno") Optional<String> categoryno,
@@ -73,6 +73,7 @@ public class BlogController {
 		
 		BlogVo blogVo = blogService.getBlog(id);
 		model.addAttribute("blog", blogVo);
+		
 		return "/blog/admin-basic";
 	}
 	
@@ -98,8 +99,10 @@ public class BlogController {
 	public String adminCategory(
 			@PathVariable("id") String id,
 			Model model) {
+		
 		BlogVo blogVo = blogService.getBlog(id);
 		List<CategoryVo> categoryList = categorySrvice.getCategoryList(id);
+		
 		model.addAttribute("blog", blogVo);
 		model.addAttribute("categoryList", categoryList);
 		
@@ -111,7 +114,9 @@ public class BlogController {
 	public String adminAddCategory(
 			@PathVariable("id") String id,
 			CategoryVo categoryVo) {
+		
 		categorySrvice.insertCategory(categoryVo);
+		
 		return "redirect:/" + categoryVo.getId() + "/admin/category";
 	}
 	
@@ -119,11 +124,22 @@ public class BlogController {
 	@RequestMapping("/admin/category/delete/{categoryno}")
 	public String adminDeleteCategory(
 			@PathVariable("id") String id,
-			@PathVariable("categoryno") String categoryNo) {
+			@PathVariable("categoryno") String categoryNo,
+			Model model) {
 		
 		CategoryVo categoryVo = categorySrvice.getCategory(categoryNo);
-		categorySrvice.deleteCategory(categoryVo);
+		Long categoryPostCount = categorySrvice.getCategoryPostCount(categoryNo);
+		Long categoryCount = categorySrvice.getCategoryCount(categoryVo.getId());
 		
+		if(categoryPostCount != 0 ) {
+			model.addAttribute("categoryPostCount", categoryPostCount);
+			return "forward:/" + categoryVo.getId() + "/admin/category"; 
+		}else if(categoryCount <= 1) {
+			model.addAttribute("categoryCount", categoryCount);
+			return "forward:/" + categoryVo.getId() + "/admin/category"; 
+		}
+		
+		categorySrvice.deleteCategory(categoryVo);
 		
 		return "redirect:/" + categoryVo.getId() + "/admin/category";
 	}
@@ -133,10 +149,13 @@ public class BlogController {
 	public String adminWritePost(
 			@PathVariable("id") String id,
 			Model model) {
+		
 		BlogVo blogVo = blogService.getBlog(id);
 		List<CategoryVo> categoryList = categorySrvice.getCategoryList(id);
+		
 		model.addAttribute("blog", blogVo);
 		model.addAttribute("categoryList", categoryList);
+		
 		return "/blog/admin-write";
 	}
 	
@@ -147,8 +166,10 @@ public class BlogController {
 			String title,
 			String category,
 			String contents) {
+		
 		Map<String, Object> map = Map.of("id", id, "title", title, "category", category, "contents", contents);
 		postService.writePost(map);
+		
 		return "redirect:/" + id + "/admin/basic";
 	}
 

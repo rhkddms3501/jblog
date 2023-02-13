@@ -40,6 +40,7 @@ public class UserController {
 			model.addAttribute("isUser", isUser);
 			return "user/join";
 		}
+		
 		userService.addUser(vo);
 		blogService.createBlog(vo);
 		categoryService.createCategory(vo);

@@ -14,6 +14,7 @@
 											order by no
 					                        limit 1
 										)
+					order by no desc
 				]]>
 			</when>
 			<otherwise>
@@ -21,6 +22,7 @@
 					select no, title, contents, reg_date, category_no
 					from post
 					where category_no = #{categoryNo }
+					order by no desc
 				]]>	
 			</otherwise>
 		</choose>
@@ -39,7 +41,7 @@
 											order by no
 					                        limit 1
 										)
-					order by no
+					order by no desc
 					limit 1
 				]]>
 			</when>
@@ -48,7 +50,7 @@
 					select no, title, contents, reg_date, category_no
 					from post
 					where category_no = #{categoryNo }
-					order by no
+					order by no desc
 					limit 1
 				]]>
 			</when>

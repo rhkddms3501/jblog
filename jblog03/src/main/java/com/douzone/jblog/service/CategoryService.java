@@ -12,7 +12,7 @@ import com.douzone.jblog.vo.UserVo;
 
 @Service
 public class CategoryService {
-	
+
 	@Autowired
 	CategoryRepository categoryRepository;
 
@@ -20,25 +20,33 @@ public class CategoryService {
 		categoryRepository.createCategory(userVo);
 	}
 
+	public CategoryVo getCategory(String categoryNo) {
+		return categoryRepository.getCategory(categoryNo);
+	}
+
 	public List<CategoryVo> getCategoryList(String id) {
 		return categoryRepository.getCategoryList(id);
+	}
+
+	public boolean isCategory(String id, String category) {
+		Map<String, Object> map = Map.of("id", id, "category", category);
+		return categoryRepository.isCategory(map);
+	}
+
+	public Long getCategoryPostCount(String categoryNo) {
+		return categoryRepository.getCategoryPostCount(categoryNo);
+	}
+
+	public Long getCategoryCount(String id) {
+		return categoryRepository.getCategoryCount(id);
 	}
 
 	public void insertCategory(CategoryVo categoryVo) {
 		categoryRepository.insertCategory(categoryVo);
 	}
 
-	public CategoryVo getCategory(String categoryNo) {
-		return categoryRepository.getCategory(categoryNo);
-	}
-
 	public void deleteCategory(CategoryVo categoryVo) {
 		categoryRepository.deleteCategory(categoryVo);
-	}
-
-	public boolean isCategory(String id, String category) {
-		Map<String, Object> map = Map.of("id", id, "category", category);
-		return categoryRepository.isCategory(map);
 	}
 
 }

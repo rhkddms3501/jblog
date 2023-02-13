@@ -12,21 +12,20 @@ public class UserService {
 	@Autowired
 	UserRepository userRepository;
 
+	public void addUser(UserVo vo) {
+		userRepository.addUser(vo);
+	}
+
 	public UserVo selectUser(UserVo vo) {
 		return userRepository.selectUser(vo);
 	}
 
-	public void addUser(UserVo vo) {
-		userRepository.addUser(vo);
+	public boolean isUser(String user) {
+		return userRepository.isUser(user);
 	}
 
 	public UserVo login(UserVo vo) {
 		return userRepository.login(vo);
 	}
 
-	public boolean isUser(String user) {
-		return userRepository.isUser(user);
-	}
-	
-	
 }

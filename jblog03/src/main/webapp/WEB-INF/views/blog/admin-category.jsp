@@ -34,10 +34,21 @@
 							<td>${category.name }</td>
 							<td>${category.countPost }</td>
 							<td>${category.description }</td>
-							<td><img src="${pageContext.request.contextPath}/assets/images/delete.jpg"><a href="${pageContext.request.contextPath}/${authUser.id }/admin/category/delete/${category.no }">&nbsp;</a></td>
+							<td>
+								<a href="${pageContext.request.contextPath}/${authUser.id }/admin/category/delete/${category.no }">
+									<img src="${pageContext.request.contextPath}/assets/images/delete.jpg" />
+								</a>
+							</td>
 						</tr>
 		      		</c:forEach>
 				</table>
+      	
+      			<c:if test="${categoryPostCount > 0 }">
+      				<p style="color: red">카테고리에 포스트가 존재해 카테고리를 삭제할 수 없습니다.</p>
+      			</c:if>
+      			<c:if test="${categoryCount <= 1 }">
+      				<p style="color: red">카테고리는 하나 이상 존재해야 합니다.</p>
+      			</c:if>
       	
       			<h4 class="n-c">새로운 카테고리 추가</h4>
       			<form action="${pageContext.request.contextPath}/${authUser.id}/admin/category/add" method="post">

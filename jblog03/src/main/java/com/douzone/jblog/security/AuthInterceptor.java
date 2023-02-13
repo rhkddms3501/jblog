@@ -22,7 +22,6 @@ public class AuthInterceptor implements HandlerInterceptor {
 			throws Exception {
 
 		if (!(handler instanceof HandlerMethod)) {
-			// DefaultServlethandler가 처리하는 경우(정적 자원, /assets/**)
 			return true;
 		}
 
@@ -47,20 +46,6 @@ public class AuthInterceptor implements HandlerInterceptor {
 		return true;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

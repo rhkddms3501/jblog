@@ -11,20 +11,20 @@ import com.douzone.jblog.vo.PostVo;
 
 @Repository
 public class PostRepository {
-	
+
 	@Autowired
 	SqlSession sqlSession;
 
-	public List<PostVo> getPostList(Map<String, Object> map) {
-		return sqlSession.selectList("post.getPostList", map);
+	public void writePost(Map<String, Object> map) {
+		sqlSession.insert("post.writePost", map);
 	}
 
 	public PostVo getPost(Map<String, Object> map) {
 		return sqlSession.selectOne("post.getPost", map);
 	}
 
-	public void writePost(Map<String, Object> map) {
-		sqlSession.insert("post.writePost", map);
+	public List<PostVo> getPostList(Map<String, Object> map) {
+		return sqlSession.selectList("post.getPostList", map);
 	}
 
 	public boolean isPost(Map<String, Object> map) {

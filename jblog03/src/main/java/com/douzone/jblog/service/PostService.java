@@ -14,19 +14,19 @@ public class PostService {
 
 	@Autowired
 	PostRepository postRepository;
-	
-	public List<PostVo> getPostList(String id, String categoryNo) {
-		Map<String, Object> map = Map.of("id", id, "categoryNo", categoryNo);
-		return postRepository.getPostList(map);
-	}
-
-	public PostVo getPost(String id, String categoryNo, String postNo) {
-		Map<String, Object> map = Map.of("id", id, "categoryNo", categoryNo,  "postNo", postNo);
-		return postRepository.getPost(map);
-	}
 
 	public void writePost(Map<String, Object> map) {
 		postRepository.writePost(map);
+	}
+
+	public PostVo getPost(String id, String categoryNo, String postNo) {
+		Map<String, Object> map = Map.of("id", id, "categoryNo", categoryNo, "postNo", postNo);
+		return postRepository.getPost(map);
+	}
+
+	public List<PostVo> getPostList(String id, String categoryNo) {
+		Map<String, Object> map = Map.of("id", id, "categoryNo", categoryNo);
+		return postRepository.getPostList(map);
 	}
 
 	public boolean isPost(String id, String category, String post) {

@@ -8,40 +8,45 @@
 			values(null, '미분류', '카테고리 설명 란', #{id })	
 		]]>
 	</insert>
-	
+
+	<select id="getCategory" parameterType="string"
+		resultType="categoryvo">
+		<![CDATA[
+			select no, name, description, id
+			from category
+			where no = #{categoryNo }	
+		]]>
+	</select>
+
 	<select id="getCategoryList" resultType="categoryvo">
 		<![CDATA[
 			select a.no, a.name, a.id, a.description, count(b.no) as countPost
 			from category a left join post b
 				on a.no = b.category_no
 			where id = #{id }
-			group by a.no
+			group by a.no;
 		]]>
 	</select>
-	
-	<insert id="insertCategory" parameterType="categoryvo">
+
+	<select id="getCategoryPostCount" parameterType="string"
+		resultType="long">
 		<![CDATA[
-			insert into category
-			values(null, #{name }, #{description }, #{id })	
-		]]>
-	</insert>
-	
-	<select id="getCategory" parameterType="string" resultType="categoryvo">
-		<![CDATA[
-			select no, name, description, id
-			from category
-			where no = #{categoryNo }
+			select count(b.no) as countPost
+			from category a join post b
+				on a.no = b.category_no
+			where a.no = #{categoryNo }
 		]]>
 	</select>
-	
-	<delete id="deleteCategory" parameterType="categoryvo">
+
+	<select id="getCategoryCount" parameterType="string"
+		resultType="long">
 		<![CDATA[
-			delete 
+			select count(*)
 			from category
-			where no = #{no }
+			where id = #{id }
 		]]>
-	</delete>
-	
+	</select>
+
 	<select id="isCategory" parameterType="map" resultType="boolean">
 		<![CDATA[
 			select ifnull(count(*), 0)
@@ -49,4 +54,21 @@
 			where id = #{id } and no = #{category }
 		]]>
 	</select>
+
+	<insert id="insertCategory" parameterType="categoryvo">
+		<![CDATA[
+			insert into category
+			values(null, #{name }, #{description }, #{id })	
+		]]>
+	</insert>
+
+	<delete id="deleteCategory" parameterType="categoryvo">
+		<![CDATA[
+			delete 
+			from category
+			where no = #{no }
+		]]>
+	</delete>
+
+
 </mapper>

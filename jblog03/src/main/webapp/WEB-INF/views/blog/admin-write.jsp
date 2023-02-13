@@ -45,7 +45,7 @@
 				</form>
 			</div>
 		</div>
-		<c:import url="/WEB-INF/views/includes/blog-footer.jsp" />>
+		<c:import url="/WEB-INF/views/includes/blog-footer.jsp" />
 	</div>
 </body>
 </html>

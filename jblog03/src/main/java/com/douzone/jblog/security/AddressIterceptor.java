@@ -28,7 +28,6 @@ public class AddressIterceptor implements HandlerInterceptor {
 			throws Exception {
 		
 		if (!(handler instanceof HandlerMethod)) {
-			// DefaultServlethandler가 처리하는 경우(정적 자원, /assets/**)
 			return true;
 		}
 
@@ -55,7 +54,7 @@ public class AddressIterceptor implements HandlerInterceptor {
 				response.sendRedirect(request.getContextPath());
 				return false;
 			}
-		}else if (blogInfo.length == 4) {
+		}else if (blogInfo.length >= 4) {
 			boolean isPost = postService.isPost(blogInfo[1], blogInfo[2], blogInfo[3]);
 			if(!isPost) {
 				response.sendRedirect(request.getContextPath());
