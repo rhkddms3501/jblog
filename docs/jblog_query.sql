@@ -50,7 +50,20 @@ values(null, '미분류', '카테고리 설명 란', 0, hd);
 -- getCategory (카테소리 선택)
 select no, name, description, id
 from category
-where no = 1;
+where no = 9;
+
+-- getCategoryPostCount (카테고리에 포스트 몇개 있는지)
+select count(b.no) as countPost
+from category a join post b
+	on a.no = b.category_no
+where a.no = 2;
+
+-- getCategoryCount (카테고리 몇개 있는지)
+select count(*)
+from category
+where id = 'hd';
+
+
 
 -- getCategoryList (카테고리 리스트)
 select a.no, a.name, a.id, a.description, count(b.no) as countPost
