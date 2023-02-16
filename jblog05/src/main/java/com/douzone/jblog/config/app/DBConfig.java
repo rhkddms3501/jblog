@@ -60,4 +60,9 @@ public class DBConfig {
 * 		- method에만 넣을 수 있음
 * 		- 보통 method이름이 곧 bean이름이 됨
 * 
+* 
+* DataSource
+* 		- DB와 관계된 커넥션 정보를 담고 있으며 빈으로 등록하여 인자로 넘겨준다
+* 			-> 이 과정을 통해 Spring은 DataSource로 DB와의 연결을 획득 한다.
+* 
 */
