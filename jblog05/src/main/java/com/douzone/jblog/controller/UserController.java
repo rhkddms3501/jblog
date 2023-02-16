@@ -32,8 +32,10 @@ public class UserController {
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String join(UserVo vo, Model model) {
 		
+		
+		
 		UserVo selectUser = userService.selectUser(vo);
-		boolean isUser = false; 
+		boolean isUser = false;
 		
 		if(selectUser != null) {	
 			isUser = true; 
